@@ -5,10 +5,16 @@ authors = ["DankDumpster <dev@mtbk.me>"]
 edition = "2018"
 
 [workspace]
-members = ["crates/*", "cli"]
+members = ["crates/*"]
 
 [dependencies]
 bcrypt = "0.9.0"
 
+server = { path = "crates/server" }
+
 [dependencies.actix-web]
-version = "3.0"
+version = "4.0.0-beta.3"
+
+[dependencies.clap]
+version = "3.0.0-beta.2"
+features = ["yaml"]

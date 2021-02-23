@@ -1,10 +1,18 @@
-use hex_literal::hex;
-use sha2::{Digest, Sha256};
+mod handler;
+mod start;
 
-fn main() {
-    let mut hasher = Sha256::new();
-    hasher.update(b"pee pee");
+use clap::{load_yaml, App as ClapApp};
+use std::error::Error;
 
-    let result = hasher.finalize();
-    println!("{:X}", result)
+#[actix_web::main]
+async fn main() -> Result<(), Box<dyn Error>> {
+    let yaml = load_yaml!("../cli.yaml");
+    let matches = ClapApp::from(yaml).get_matches();
+
+
+    if let Some(ref matches) = matches.subcommand_matches("start") {
+        server::start().await?;
+    }
+
+    Ok(())
 }
