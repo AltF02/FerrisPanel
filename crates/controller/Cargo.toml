@@ -1,5 +1,5 @@
 [package]
-name = "models"
+name = "database"
 version = "0.1.0"
 authors = ["DankDumpster <staalkoper@gmail.com>"]
 edition = "2018"
@@ -7,5 +7,9 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-bcrypt = "0.9.0"
 async-trait = "0.1.42"
+models = { path = "../models" }
+
+[dependencies.sqlx]
+version = "0.5.1"
+features = ["postgres", "runtime-actix-rustls"]

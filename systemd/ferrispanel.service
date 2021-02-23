@@ -1,0 +1,15 @@
+[Unit]
+Description=ferrispanel
+
+[Service]
+Type=simple
+WorkingDirectory=/etc/ferrispanel
+ExecStart=/usr/sbin/ferrispanel run
+ExecStop=/usr/sbin/pufferpanel shutdown --pid $MAINPID
+User=ferrispanel
+Group=ferrispanel
+TimeoutStopSec=5m
+SendSIGKILL=no
+
+[Install]
+WantedBy=multi-user.target
