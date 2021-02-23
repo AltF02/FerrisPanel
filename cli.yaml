@@ -16,3 +16,4 @@ subcommands:
         - pid:
             short: p
             about: The process id
+            takes_value: true

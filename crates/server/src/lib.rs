@@ -16,7 +16,7 @@ pub async fn start() -> Result<(), Box<dyn Error>>{
     })
     .bind("0.0.0.0:8000")?
     .run()
-    .await;
+    .await?;
 
     Ok(())
 }
