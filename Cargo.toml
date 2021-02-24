@@ -1,5 +1,5 @@
 [package]
-name = "ferris_panel"
+name = "ferrispanel"
 version = "0.1.0"
 authors = ["DankDumpster <dev@mtbk.me>"]
 edition = "2018"
