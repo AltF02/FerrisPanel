@@ -12,19 +12,20 @@ pub struct User {
 
 #[async_trait]
 trait UserModify {
-    async fn set_password(&mut self, pw: &str) -> Result<(), dyn std::error::Error>;
+    async fn set_password(&mut self, pw: &str) -> Result<(), Box<dyn Error>>;
 }
 
 #[async_trait]
 impl UserModify for User {
-    async fn set_password(&mut self, pw: &str) -> Result<(), dyn Error> {
+    async fn set_password(&mut self, pw: &str) -> Result<(), Box<dyn Error>> {
         let hash = bcrypt::hash(pw, DEFAULT_COST)?;
         self.password_hash = hash;
         Ok(())
     }
 }
 
-#[async_trait]
-impl Model for User {
-    fn new() {}
-}
+// impl Model for User {
+//     fn new() {
+//         return;
+//     }
+// }
