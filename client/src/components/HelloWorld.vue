@@ -22,7 +22,7 @@
     <a href="https://v3.vuejs.org/" target="_blank">Vue 3 Docs</a>
   </p>
 
-  <button @click="count++">count is: {{ count }}</button>
+  <button @click="increment">count is: {{ count }}</button>
   <p>
     Edit
     <code>components/HelloWorld.vue</code> to test hot module replacement.
@@ -30,21 +30,22 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from 'vue';
+import { Options, Vue } from 'vue-class-component';
 
-export default defineComponent({
-  name: 'HelloWorld',
+@Options({
   props: {
-    msg: {
-      type: String,
-      required: true,
-    },
+    msg: String,
   },
-  setup: () => {
-    const count = ref(0);
-    return { count };
-  },
-});
+})
+export default class HelloWorld extends Vue {
+  msg!: string
+
+  count = 0;
+
+  public increment() {
+    this.count += 1;
+  }
+}
 </script>
 
 <style scoped>
