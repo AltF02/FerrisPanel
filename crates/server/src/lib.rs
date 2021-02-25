@@ -19,7 +19,7 @@ pub async fn start() -> Result<(), Box<dyn Error>>{
             .service(pee)
             .service(actix_files::Files::new("/", "./client/dist").index_file("index.html"))
     })
-    .bind("0.0.0.0:8080")?
+    .bind("0.0.0.0:3000")?
     .run()
     .await?;
 
