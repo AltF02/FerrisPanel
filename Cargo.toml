@@ -13,8 +13,13 @@ bcrypt = "0.9.0"
 core = { path = "crates/core" }
 
 [dependencies.actix-web]
-version = "4.0.0-beta.3"
+version = "3"
 
 [dependencies.clap]
 version = "3.0.0-beta.2"
 features = ["yaml"]
+
+[dev-dependencies.cargo-husky]
+version = "1"
+default-features = false
+features = ["precommit-hook", "run-cargo-fmt", "run-cargo-clippy"]

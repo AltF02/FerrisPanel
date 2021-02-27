@@ -4,12 +4,12 @@ about: The official cli for ferrispanel
 subcommands:
   - start:
       about: Starts the panel
-      version: "0.1"
+      version: "1.0"
       aliases:
         - run
   - shutdown:
       about: Stops the panel
-      version: "0.1"
+      version: "1.0"
       aliases:
         - run
       args:
@@ -17,3 +17,12 @@ subcommands:
             short: p
             about: The process id
             takes_value: true
+  - users:
+      about: Manage the users
+      version: "0.1"
+      aliases:
+        - user
+      subcommands:
+        - add:
+            about: Creates a new user
+            version: "0.1"

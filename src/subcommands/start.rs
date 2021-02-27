@@ -1,23 +1,29 @@
-use std::error::Error;
 use clap::ArgMatches;
+use std::error::Error;
 
-use std::fs::File;
-use std::io::prelude::*;
+#[cfg(not(debug_assertions))]
 use crate::constants::PID_FILE;
+#[cfg(not(debug_assertions))]
+use std::fs::File;
+#[cfg(not(debug_assertions))]
+use std::io::prelude::*;
 
 pub async fn run(_matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
     #[cfg(not(debug_assertions))]
     {
-        if File::open("/run/ferrispanel/ferrispanel.pid").is_ok() {
+        if File::open(PID_FILE).is_ok() {
             println!("Process already running...");
             std::process::exit(1);
         }
 
         let mut pid_file = File::create(PID_FILE)?;
         pid_file.write_all(format!("{}", std::process::id()).as_bytes())?;
-
     }
     println!("Starting server..");
-    core::server::start().await?;
+    let connection =
+        core::controller::connect("postgresql://postgres:password123@localhost:5432/ferrispanel")
+            .await
+            .unwrap();
+    core::server::start(&connection).await?;
     Ok(())
 }

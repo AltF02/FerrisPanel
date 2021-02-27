@@ -11,3 +11,4 @@ sha2 = "0.9.3"
 
 models = { path = "../models" }
 server = { path = "../server" }
+controller = { path = "../controller" }
