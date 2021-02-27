@@ -3,7 +3,6 @@ use std::error::Error;
 use clap::{load_yaml, App as ClapApp, ArgMatches};
 
 mod constants;
-mod handler;
 mod subcommands;
 
 #[actix_web::main]
