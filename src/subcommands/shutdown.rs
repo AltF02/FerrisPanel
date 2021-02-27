@@ -1,11 +1,11 @@
+use crate::constants::PID_FILE;
 use clap::ArgMatches;
 use std::error::Error;
 use std::fs::File;
-use std::process::Command;
 use std::io::Read;
-use crate::constants::PID_FILE;
+use std::process::Command;
 
-pub async fn run(_matches: &ArgMatches) -> Result<(), Box<dyn Error>>{
+pub async fn run(_matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
     if let Ok(mut file) = File::open(PID_FILE) {
         println!("Shutting down...");
 

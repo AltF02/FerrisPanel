@@ -26,3 +26,8 @@ subcommands:
         - add:
             about: Creates a new user
             version: "0.1"
+        - remove:
+            about: Removes a user
+            version: "0.1"
+            aliases:
+              - rm

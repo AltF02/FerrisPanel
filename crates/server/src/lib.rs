@@ -24,7 +24,7 @@ async fn pee(_req: HttpRequest) -> impl Responder {
 
 pub async fn start(pg_pool: &PgPool) -> Result<(), Box<dyn Error>> {
     #[cfg(not(debug_assertions))]
-    simple_logging::log_to_file("/etc/ferrispanel/out.log", LevelFilter::Info);
+    simple_logging::log_to_file("/etc/ferrispanel/out.log", LevelFilter::Info)?;
     #[cfg(debug_assertions)]
     simple_logging::log_to_stderr(LevelFilter::Debug);
 

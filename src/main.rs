@@ -1,12 +1,10 @@
-#![feature(num_as_ne_bytes)]
-
 use std::error::Error;
 
-use clap::{App as ClapApp, load_yaml, ArgMatches};
+use clap::{load_yaml, App as ClapApp, ArgMatches};
 
+mod constants;
 mod handler;
 mod subcommands;
-mod constants;
 
 #[actix_web::main]
 async fn main() -> Result<(), Box<dyn Error>> {
