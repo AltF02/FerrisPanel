@@ -1,4 +1,3 @@
-use crate::Model;
 use bcrypt::DEFAULT_COST;
 use sqlx::PgPool;
 use std::error::Error;
@@ -13,7 +12,7 @@ pub struct User {
 
 #[async_trait]
 pub trait UserModify {
-    async fn new(
+    async fn create(
         email: String,
         name: String,
         pw: String,
@@ -24,7 +23,7 @@ pub trait UserModify {
 
 #[async_trait]
 impl UserModify for User {
-    async fn new(
+    async fn create(
         name: String,
         email: String,
         pw: String,

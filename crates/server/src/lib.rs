@@ -1,3 +1,5 @@
+#![allow(clippy::type_complexity)]
+
 mod api;
 mod middleware;
 
@@ -5,12 +7,11 @@ mod middleware;
 extern crate actix_web;
 
 use actix_identity::{CookieIdentityPolicy, IdentityService};
-use actix_session::CookieSession;
 use actix_web::middleware::Logger;
 use actix_web::{App, HttpRequest, HttpServer, Responder};
 use log::LevelFilter;
 use rand::Rng;
-use sqlx::{PgPool, Pool, Postgres};
+use sqlx::PgPool;
 use std::error::Error;
 
 pub mod prelude {
@@ -22,7 +23,7 @@ async fn pee(_req: HttpRequest) -> impl Responder {
     "Penis"
 }
 
-pub async fn start(pg_pool: &PgPool) -> Result<(), Box<dyn Error>> {
+pub async fn start(_pg_pool: &PgPool) -> Result<(), Box<dyn Error>> {
     #[cfg(not(debug_assertions))]
     simple_logging::log_to_file("/etc/ferrispanel/out.log", LevelFilter::Info)?;
     #[cfg(debug_assertions)]
@@ -33,16 +34,11 @@ pub async fn start(pg_pool: &PgPool) -> Result<(), Box<dyn Error>> {
     HttpServer::new(move || {
         App::new()
             .wrap(Logger::default())
-            .wrap(
-                CookieSession::signed(&private_key)
+            .wrap(IdentityService::new(
+                CookieIdentityPolicy::new(&private_key)
                     .secure(true)
-                    .name("ferrispanel.session"),
-            )
-            // .wrap(IdentityService::new(
-            //     CookieIdentityPolicy::new(&private_key)
-            //         .secure(true)
-            //         .name("ferrispanel.identity")
-            // ))
+                    .name("ferrispanel.identity"),
+            ))
             .service(pee)
             .service(actix_files::Files::new("/", "./www").index_file("index.html"))
     })

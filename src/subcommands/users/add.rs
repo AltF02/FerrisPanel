@@ -2,7 +2,7 @@ use core::controller;
 use core::models::{User, UserModify};
 use core::utils::EMAIL_REGEX;
 use dialoguer::theme::ColorfulTheme;
-use dialoguer::{Confirm, Input, Password};
+use dialoguer::{Input, Password};
 use regex::Regex;
 use std::error::Error;
 
@@ -35,6 +35,6 @@ pub(crate) async fn run() -> Result<(), Box<dyn Error>> {
         .interact()
         .unwrap();
 
-    User::new(username, email, password, pool).await?;
+    User::create(username, email, password, pool).await?;
     Ok(())
 }

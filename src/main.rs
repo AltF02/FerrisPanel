@@ -1,7 +1,6 @@
 use std::error::Error;
 
-use clap::{load_yaml, App as ClapApp, ArgMatches};
-use dialoguer::theme::ColorfulTheme;
+use clap::{load_yaml, App as ClapApp};
 use dotenv::dotenv;
 
 mod constants;
