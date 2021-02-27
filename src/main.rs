@@ -1,6 +1,8 @@
 use std::error::Error;
 
 use clap::{load_yaml, App as ClapApp, ArgMatches};
+use dialoguer::theme::ColorfulTheme;
+use dotenv::dotenv;
 
 mod constants;
 mod subcommands;
@@ -9,6 +11,8 @@ mod subcommands;
 async fn main() -> Result<(), Box<dyn Error>> {
     let yaml = load_yaml!("../cli.yaml");
     let matches = ClapApp::from(yaml).get_matches();
+
+    dotenv().ok();
 
     subcommands::handle(&matches).await?;
 

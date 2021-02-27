@@ -20,10 +20,9 @@ pub async fn run(_matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
         pid_file.write_all(format!("{}", std::process::id()).as_bytes())?;
     }
     println!("Starting server..");
-    let connection =
-        core::controller::connect("postgresql://postgres:password123@localhost:5432/ferrispanel")
-            .await
-            .unwrap();
+    let connection = core::controller::connect(std::env::var("DATABASE_URL").unwrap().as_str())
+        .await
+        .unwrap();
     core::server::start(&connection).await?;
     Ok(())
 }

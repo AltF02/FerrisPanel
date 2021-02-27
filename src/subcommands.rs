@@ -1,8 +1,8 @@
 use clap::ArgMatches;
 use std::error::Error;
 
-mod start;
 mod shutdown;
+mod start;
 mod users;
 
 pub async fn handle(matches: &ArgMatches) -> Result<(), Box<dyn Error>> {

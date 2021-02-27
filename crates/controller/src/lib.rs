@@ -1,12 +1,8 @@
-use sqlx::{Postgres, Pool};
 use sqlx::postgres::PgPoolOptions;
+use sqlx::{Pool, Postgres};
 use std::error::Error;
 
-pub mod users;
-
-pub async fn connect(
-    uri: &str,
-) -> Result<Pool<Postgres>, Box<dyn Error + Send + Sync>> {
+pub async fn connect(uri: &str) -> Result<Pool<Postgres>, Box<dyn Error + Send + Sync>> {
     let pool = PgPoolOptions::new()
         .max_connections(20)
         .connect(uri)
@@ -16,7 +12,6 @@ pub async fn connect(
 }
 
 pub mod prelude {
-    pub use crate::users;
     pub use crate::connect;
 }
 
