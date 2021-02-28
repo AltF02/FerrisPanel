@@ -62,7 +62,7 @@ impl UserModify for User {
 
     async fn fetch(fetch: String, pool: &PgPool) -> Result<Option<User>, Box<dyn Error>> {
         let user: Option<User> =
-            sqlx::query_as("SELECT * FROM users WHERE email = $1 OR id = $1 OR name = $1")
+            sqlx::query_as("SELECT * FROM users WHERE email = $1 OR name = $1")
                 .bind(fetch)
                 .fetch_optional(pool)
                 .await?;

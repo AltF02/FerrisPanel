@@ -20,6 +20,9 @@
         "import/no-extraneous-dependencies": "off",
         "import/no-unresolved": "off",
         "import/extensions": "off",
-        "vue/no-multiple-template-root": "off"
+        "vue/no-multiple-template-root": "off",
+        "max-len": "warn",
+        "class-methods-use-this": "off",
+        "no-console": "off"
     }
 }
