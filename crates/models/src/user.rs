@@ -2,6 +2,7 @@ use bcrypt::DEFAULT_COST;
 use sqlx::PgPool;
 use std::error::Error;
 
+#[derive(sqlx::FromRow, Clone, Debug)]
 pub struct User {
     pub id: i32,
     pub name: String,
@@ -19,6 +20,12 @@ pub trait UserModify {
         pool: PgPool,
     ) -> Result<(), Box<dyn Error>>;
     async fn set_password(&mut self, pw: String, pool: &PgPool) -> Result<(), Box<dyn Error>>;
+    async fn fetch(fetch: String, pool: &PgPool) -> Result<Option<User>, Box<dyn Error>>;
+    async fn login(
+        id: &String,
+        password: &String,
+        pool: &PgPool,
+    ) -> Result<Option<User>, Box<dyn Error>>;
 }
 
 #[async_trait]
@@ -51,6 +58,40 @@ impl UserModify for User {
             .await?;
 
         Ok(())
+    }
+
+    async fn fetch(fetch: String, pool: &PgPool) -> Result<Option<User>, Box<dyn Error>> {
+        let user: Option<User> =
+            sqlx::query_as("SELECT * FROM users WHERE email = $1 OR id = $1 OR name = $1")
+                .bind(fetch)
+                .fetch_optional(pool)
+                .await?;
+
+        Ok(user)
+    }
+
+    async fn login(
+        id: &String,
+        password: &String,
+        pool: &PgPool,
+    ) -> Result<Option<User>, Box<dyn Error>> {
+        let user: Option<User> =
+            sqlx::query_as("SELECT * FROM users WHERE email = $1 OR name = $1")
+                .bind(id)
+                .fetch_optional(pool)
+                .await?;
+
+        if user.is_none() {
+            return Ok(None);
+        }
+
+        let user_hash = user.clone().unwrap().password_hash;
+        let verify = bcrypt::verify(password, user_hash.as_str());
+        if verify.unwrap() {
+            return Ok(user);
+        }
+
+        Ok(None)
     }
 }
 

@@ -23,6 +23,6 @@ pub async fn run(_matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
     let connection = core::controller::connect(std::env::var("DATABASE_URL").unwrap().as_str())
         .await
         .unwrap();
-    core::server::start(&connection).await?;
+    core::server::start(connection).await?;
     Ok(())
 }

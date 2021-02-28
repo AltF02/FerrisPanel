@@ -17,6 +17,10 @@ log = "0.4.14"
 futures = "0.3.13"
 rand = "0.8.3"
 
+serde = "1.0.123"
+
+models = { path = "../models" }
+
 [dependencies.sqlx]
 version = "0.4"
 features = ["runtime-actix-rustls"]

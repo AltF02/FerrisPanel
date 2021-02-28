@@ -2070,7 +2070,9 @@ dependencies = [
  "actix-web",
  "futures",
  "log",
+ "models",
  "rand 0.8.3",
+ "serde",
  "simple-logging",
  "sqlx",
 ]
