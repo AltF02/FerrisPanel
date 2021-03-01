@@ -1,18 +1,19 @@
-mod handler;
-mod start;
+use std::error::Error;
 
 use clap::{load_yaml, App as ClapApp};
-use std::error::Error;
+use dotenv::dotenv;
+
+mod constants;
+mod subcommands;
 
 #[actix_web::main]
 async fn main() -> Result<(), Box<dyn Error>> {
     let yaml = load_yaml!("../cli.yaml");
     let matches = ClapApp::from(yaml).get_matches();
 
+    dotenv().ok();
 
-    if let Some(ref matches) = matches.subcommand_matches("start") {
-        server::start().await?;
-    }
+    subcommands::handle(&matches).await?;
 
     Ok(())
 }

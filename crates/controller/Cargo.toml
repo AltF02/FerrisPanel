@@ -1,5 +1,5 @@
 [package]
-name = "database"
+name = "controller"
 version = "0.1.0"
 authors = ["DankDumpster <staalkoper@gmail.com>"]
 edition = "2018"
@@ -11,5 +11,5 @@ async-trait = "0.1.42"
 models = { path = "../models" }
 
 [dependencies.sqlx]
-version = "0.5.1"
+version = "0.4"
 features = ["postgres", "runtime-actix-rustls"]

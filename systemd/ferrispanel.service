@@ -4,8 +4,8 @@ Description=ferrispanel
 [Service]
 Type=simple
 WorkingDirectory=/etc/ferrispanel
-ExecStart=/usr/sbin/ferrispanel start
-ExecStop=/usr/sbin/pufferpanel shutdown --pid $MAINPID
+ExecStart=/usr/bin/ferrispanel start
+ExecStop=/usr/bin/pufferpanel shutdown
 User=ferrispanel
 Group=ferrispanel
 TimeoutStopSec=5m

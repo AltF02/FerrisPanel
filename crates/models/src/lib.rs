@@ -2,10 +2,15 @@
 extern crate async_trait;
 
 pub mod user;
+mod server;
+mod node;
 
-#[async_trait]
 pub trait Model {
     fn new() -> Self;
+}
+
+pub mod prelude {
+    pub use crate::user::*;
 }
 
 #[cfg(test)]

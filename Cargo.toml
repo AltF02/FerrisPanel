@@ -1,5 +1,5 @@
 [package]
-name = "ferris_panel"
+name = "ferrispanel"
 version = "0.1.0"
 authors = ["DankDumpster <dev@mtbk.me>"]
 edition = "2018"
@@ -8,13 +8,20 @@ edition = "2018"
 members = ["crates/*"]
 
 [dependencies]
-bcrypt = "0.9.0"
+dialoguer = "0.7"
+regex = "1.4"
+dotenv = "0.15.0"
 
-server = { path = "crates/server" }
+core = { path = "crates/core" }
 
 [dependencies.actix-web]
-version = "4.0.0-beta.3"
+version = "3.3"
 
 [dependencies.clap]
 version = "3.0.0-beta.2"
 features = ["yaml"]
+
+[dev-dependencies.cargo-husky]
+version = "1"
+default-features = false
+features = ["precommit-hook", "run-cargo-fmt", "run-cargo-clippy"]
