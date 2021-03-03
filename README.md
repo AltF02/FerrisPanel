@@ -5,7 +5,15 @@ FerrisPanel is an open source game server panel. Made in rust
 **Dockerfile does not currently work!**
 
 ## Install
-Currently FerrisPanel doesn't 
+Currently FerrisPanel doesn't provide pre built binaries.
+
+
+### Requirements
+* [Rustup](https://rustup.rs/)
+* [Yarn](https://yarnpkg.com/)
+* [Postgres](https://www.postgresql.org/)
+
+
 ```shell
 sudo make install
 sudo systemctl enable --now ferrispanel.service

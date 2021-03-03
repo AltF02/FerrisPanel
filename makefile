@@ -2,6 +2,7 @@ install:
 	@bash ./scripts/preinstall.sh
 
 	@cargo build --release -Z unstable-options --out-dir /usr/bin
+	@yarn --cwd client
 	@yarn --cwd client build
 
 	@cp -r ./www /etc/ferrispanel/www
