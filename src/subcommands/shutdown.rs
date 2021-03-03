@@ -1,4 +1,3 @@
-use crate::constants::PID_FILE;
 use clap::ArgMatches;
 use std::error::Error;
 use std::fs::File;
@@ -6,7 +5,8 @@ use std::io::Read;
 use std::process::Command;
 
 pub async fn run(_matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
-    if let Ok(mut file) = File::open(PID_FILE) {
+    let pid_file = std::env::var("PID_FOLDER")? + "/server.pid";
+    if let Ok(mut file) = File::open(&pid_file) {
         println!("Shutting down...");
 
         let mut pid = String::new();
@@ -17,7 +17,7 @@ pub async fn run(_matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
             .output()
             .expect("Failed to execute kill");
 
-        std::fs::remove_file(PID_FILE)?;
+        std::fs::remove_file(&pid_file)?;
     } else {
         println!("Process not running...");
     }

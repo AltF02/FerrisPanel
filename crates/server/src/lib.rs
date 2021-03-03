@@ -42,6 +42,7 @@ pub async fn start(pg_pool: PgPool) -> Result<(), Box<dyn Error>> {
                     .secure(true)
                     .name("ferrispanel.identity"),
             ))
+            // .wrap(middleware::authentication::SayHi)
             .service(pee)
             .service(web::scope("/api").configure(api::init))
             .service(actix_files::Files::new("/", "./www").index_file("index.html"))

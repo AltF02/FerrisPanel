@@ -16,7 +16,7 @@ pub async fn run(_matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
             std::process::exit(1);
         }
 
-        let mut pid_file = File::create(PID_FILE)?;
+        let mut pid_file = File::create(std::env::var("PID_FOLDER")? + "/server.pid")?;
         pid_file.write_all(format!("{}", std::process::id()).as_bytes())?;
     }
     println!("Starting server..");
