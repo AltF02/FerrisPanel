@@ -2,10 +2,12 @@
 Description=ferrispanel
 
 [Service]
+Environment=DATABASE_URL=postgresql://postgres:password123@localhost:5432/ferrispanel
+Environment=PID_FOLDER=/run/ferrispanel
 Type=simple
 WorkingDirectory=/etc/ferrispanel
 ExecStart=/usr/bin/ferrispanel start
-ExecStop=/usr/bin/pufferpanel shutdown
+ExecStop=/usr/bin/ferrispanel shutdown
 User=ferrispanel
 Group=ferrispanel
 TimeoutStopSec=5m
