@@ -10,6 +10,7 @@ edition = "2018"
 actix-web = "3"
 actix-identity = "0.3.1"
 actix-files = "0.5"
+actix-service = "1.0"
 
 simple-logging = "2.0.2"
 log = "0.4.14"
@@ -18,8 +19,8 @@ futures = "0.3.13"
 rand = "0.8.3"
 
 serde = "1.0.123"
-
 models = { path = "../models" }
+core = { path = "../core" }
 
 [dependencies.sqlx]
 version = "0.4"

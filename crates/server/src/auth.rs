@@ -1,9 +1,8 @@
 use actix_web::web;
 
-mod me;
-mod user;
+pub mod login;
 
 pub fn init(cfg: &mut web::ServiceConfig) {
-    cfg.route("/me", web::get().to(me::get));
+    cfg.route("/login", web::post().to(login::post));
     // .route("/{user}", web::get().to());
 }

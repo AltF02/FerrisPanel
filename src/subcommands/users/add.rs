@@ -1,8 +1,7 @@
-use core::controller;
-use core::models::{User, UserModify};
 use core::utils::EMAIL_REGEX;
 use dialoguer::theme::ColorfulTheme;
 use dialoguer::{Input, Password};
+use models::prelude::{User, UserModify};
 use regex::Regex;
 use std::error::Error;
 

@@ -3,6 +3,7 @@ use std::error::Error;
 use std::fs::File;
 use std::io::Read;
 use std::process::Command;
+use sysinfo::{ProcessExt, SystemExt};
 
 pub async fn run(_matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
     let pid_file = std::env::var("PID_FOLDER")? + "/server.pid";
@@ -11,11 +12,13 @@ pub async fn run(_matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
 
         let mut pid = String::new();
         file.read_to_string(&mut pid)?;
+        let system = sysinfo::System::new();
 
-        Command::new("kill")
-            .args(&["-9", pid.as_str()])
-            .output()
-            .expect("Failed to execute kill");
+        if let Some(proc) = system.get_process(pid.parse::<i32>().unwrap()) {
+            proc.kill(sysinfo::Signal::Term);
+        } else {
+            println!("Unable to locate process, did it crash?");
+        }
 
         std::fs::remove_file(&pid_file)?;
     } else {

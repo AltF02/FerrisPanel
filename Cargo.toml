@@ -11,8 +11,12 @@ members = ["crates/*"]
 dialoguer = "0.7"
 regex = "1.4"
 dotenv = "0.15.0"
+sysinfo = "0.16.4"
 
 core = { path = "crates/core" }
+models = { path = "crates/models" }
+server = { path = "crates/server" }
+controller = { path = "crates/controller" }
 
 [dependencies.actix-web]
 version = "3.3"

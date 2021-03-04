@@ -1,6 +1,4 @@
-pub mod error;
-pub mod logging;
-pub mod utils;
+mod programs;
 
 #[cfg(test)]
 mod tests {

@@ -1,6 +1,7 @@
 #![allow(clippy::type_complexity)]
 
 mod api;
+mod auth;
 mod middleware;
 
 #[macro_use]
@@ -26,7 +27,7 @@ async fn pee(_req: HttpRequest) -> impl Responder {
 
 pub async fn start(pg_pool: PgPool) -> Result<(), Box<dyn Error>> {
     #[cfg(not(debug_assertions))]
-    simple_logging::log_to_file("/etc/ferrispanel/out.log", LevelFilter::Info)?;
+    simple_logging::log_to_file(core::logging::create()?, LevelFilter::Info)?;
     #[cfg(debug_assertions)]
     simple_logging::log_to_stderr(LevelFilter::Debug);
 
@@ -38,13 +39,17 @@ pub async fn start(pg_pool: PgPool) -> Result<(), Box<dyn Error>> {
             .wrap(actix_web::middleware::Compress::new(ContentEncoding::Br))
             .wrap(Logger::default())
             .wrap(IdentityService::new(
-                CookieIdentityPolicy::new(&private_key)
-                    .secure(true)
-                    .name("ferrispanel.identity"),
+                CookieIdentityPolicy::new(&private_key).secure(true).name(
+                    std::env::var("IDENTITY_COOKIE").expect("No IDENTITY_COOKIE Env variable set"),
+                ),
             ))
-            // .wrap(middleware::authentication::SayHi)
             .service(pee)
-            .service(web::scope("/api").configure(api::init))
+            .service(
+                web::scope("/api")
+                    .wrap(middleware::authentication::Auth)
+                    .configure(api::init),
+            )
+            .service(web::scope("/auth").configure(auth::init))
             .service(actix_files::Files::new("/", "./www").index_file("index.html"))
     })
     .bind("0.0.0.0:3000")?

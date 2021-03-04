@@ -30,7 +30,7 @@ export default class Login extends Vue {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id: this.username, password: this.password }),
     };
-    fetch('/api/users/me', requestOptions)
+    fetch('/auth/login', requestOptions)
       .then((response) => response.json())
       .then((data) => console.log(data));
   }

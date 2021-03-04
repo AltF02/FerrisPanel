@@ -21,5 +21,10 @@ remove:
 	@rm /lib/systemd/system/ferrispanel.service
 
 	@systemctl daemon-reload
+	@systemctl reset-failed
 
 	@echo -e "\033[0;32mSuccessfully uninstalled FerrisPanel\033[0m"
+
+dev:
+	yarn --cwd client build
+	cargo run -- start
