@@ -5,7 +5,11 @@ authors = ["DankDumpster <dev@mtbk.me>"]
 edition = "2018"
 
 [workspace]
-members = ["crates/*"]
+members = [
+    "crates/*",
+    "crates/daemon/*"
+]
+exclude = ["crates/daemon/src"]
 
 [dependencies]
 dialoguer = "0.7"

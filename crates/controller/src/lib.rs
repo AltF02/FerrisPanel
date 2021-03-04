@@ -14,11 +14,3 @@ pub async fn connect(uri: &str) -> Result<Pool<Postgres>, Box<dyn Error + Send +
 pub mod prelude {
     pub use crate::connect;
 }
-
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
-    }
-}

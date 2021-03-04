@@ -1,5 +1,5 @@
 [package]
-name = "daemon"
+name = "programs"
 version = "0.1.0"
 authors = ["DankDumpster <staalkoper@gmail.com>"]
 edition = "2018"
