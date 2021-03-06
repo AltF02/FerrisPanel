@@ -21,6 +21,7 @@ rand = "0.8.3"
 serde = "1.0.123"
 models = { path = "../models" }
 core = { path = "../core" }
+controller = { path = "../controller" }
 
 [dependencies.sqlx]
 version = "0.4"

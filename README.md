@@ -18,3 +18,6 @@ Currently FerrisPanel doesn't provide pre built binaries.
 sudo make install
 sudo systemctl enable --now ferrispanel.service
 ```
+
+
+<sub>This project was inspired by [PufferPanel](https://github.com/PufferPanel/Pufferpanel) </sub>

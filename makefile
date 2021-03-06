@@ -2,7 +2,7 @@ install:
 	@bash ./scripts/preinstall.sh
 
 	@echo -n "Compiling server (This can take some time...): "
-	@cargo build --release -Z unstable-options --out-dir /usr/bin &> /dev/null
+	@cargo build --release -Z unstable-options --out-dir /usr/bin &> install.log
 	@echo "Done."
 
 	@echo -n "Building frontend: "
@@ -15,6 +15,7 @@ install:
 	@bash ./scripts/postinstall.sh
 
 	@cp ./systemd/ferrispanel.service /lib/systemd/system
+	@cp ./config.example.yml /etc/ferrispanel/config.yml
 
 
 remove:

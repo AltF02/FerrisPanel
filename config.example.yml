@@ -1,0 +1,14 @@
+---
+database:
+  host: 'localhost'
+  port: 5432
+  user: 'postgres'
+  password: 'postgres'
+  database: 'ferrispanel'
+
+folders:
+  pid: '/run/ferrispanel'
+  work: '/etc/ferrispanel'
+
+server:
+  cookie_name: 'ferrispanel.identity'

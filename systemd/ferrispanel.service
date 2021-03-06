@@ -2,10 +2,7 @@
 Description=ferrispanel
 
 [Service]
-Environment=DATABASE_URL=postgresql://postgres:password123@localhost:5432/ferrispanel
-Environment=PID_FOLDER=/run/ferrispanel
-Environment=WORKING_DIR=/etc/ferrispanel
-Environment=IDENTITY_COOKIE=ferrispanel.identity
+Environment=CONFIG_FILE=/etc/ferrispanel/config.yml
 Type=simple
 WorkingDirectory=/etc/ferrispanel
 ExecStart=/usr/bin/ferrispanel start

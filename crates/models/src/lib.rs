@@ -1,8 +1,8 @@
 #[macro_use]
 extern crate async_trait;
 
-mod node;
-mod server;
+pub mod node;
+pub mod server;
 pub mod user;
 
 pub trait Model {

@@ -10,7 +10,9 @@ extern crate actix_web;
 use actix_identity::{CookieIdentityPolicy, IdentityService};
 use actix_web::http::ContentEncoding;
 use actix_web::middleware::Logger;
+use actix_web::test::config;
 use actix_web::{web, App, HttpRequest, HttpServer, Responder};
+use core::config::Config;
 use log::LevelFilter;
 use rand::Rng;
 use sqlx::PgPool;
@@ -25,9 +27,12 @@ async fn pee(_req: HttpRequest) -> impl Responder {
     "Penis"
 }
 
-pub async fn start(pg_pool: PgPool) -> Result<(), Box<dyn Error>> {
+pub async fn start() -> Result<(), Box<dyn Error>> {
+    let config = Config::new();
+    let pg_pool = controller::connect(&config).await.unwrap();
+
     #[cfg(not(debug_assertions))]
-    simple_logging::log_to_file(core::logging::create()?, LevelFilter::Info)?;
+    simple_logging::log_to_file(core::logging::create(&config)?, LevelFilter::Info)?;
     #[cfg(debug_assertions)]
     simple_logging::log_to_stderr(LevelFilter::Debug);
 
@@ -39,9 +44,9 @@ pub async fn start(pg_pool: PgPool) -> Result<(), Box<dyn Error>> {
             .wrap(actix_web::middleware::Compress::new(ContentEncoding::Br))
             .wrap(Logger::default())
             .wrap(IdentityService::new(
-                CookieIdentityPolicy::new(&private_key).secure(true).name(
-                    std::env::var("IDENTITY_COOKIE").expect("No IDENTITY_COOKIE Env variable set"),
-                ),
+                CookieIdentityPolicy::new(&private_key)
+                    .secure(true)
+                    .name(&config.server.cookie_name),
             ))
             .service(pee)
             .service(
