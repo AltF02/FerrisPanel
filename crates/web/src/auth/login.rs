@@ -1,8 +1,8 @@
 use actix_identity::Identity;
-use actix_web::{web, Error, HttpRequest, HttpResponse, Responder};
+use actix_web::{web, Error, HttpResponse};
 use core::error::HttpError;
 use models::prelude::{User, UserModify};
-use serde::{Deserialize, Serialize};
+use serde::Deserialize;
 use sqlx::PgPool;
 
 #[derive(Deserialize)]

@@ -3,15 +3,12 @@ type: "minecraft-java"
 name: "Minecraft - Paper"
 setup:
   - type: "download"
-    file: "https://papermc.io/api/v2/projects/paper/versions/{version}/builds/{build}/downloads/paper-{version}-{build}.jar"
-
-  - type: "move"
-    source: "paper-*.jar"
+    url: "https://papermc.io/api/v2/projects/paper/versions/{version}/builds/{build}/downloads/paper-{version}-{build}.jar"
     target: "paper.jar"
 
-#  - type: "write"
-#    content: "server-ip=${ip}\nserver-port={port}\nmotd={motd}\n"
-#    target: "server.properties"
+  - type: "write"
+    content: "server-ip={ip}\nserver-port={port}\nmotd={motd}\n"
+    target: "server.properties"
 
 run:
   program: "java"
@@ -30,3 +27,12 @@ data:
 
   - name: "build"
     value: "526"
+
+  - name: "ip"
+    value: "127.0.0.1"
+
+  - name: "port"
+    value: "5432"
+
+  - name: "motd"
+    value: "This is a minecraft server!"

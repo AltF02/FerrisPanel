@@ -1,7 +1,6 @@
-use super::models::actions::r#move::Move;
-use crate::metadata::models::actions::write::Write;
 use crate::metadata::models::actions::Action;
 use crate::metadata::models::data::Data;
+use crate::metadata::models::run::Run;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::fs::File;
@@ -16,6 +15,7 @@ pub mod run;
 pub struct MetaData {
     pub setup: Vec<Box<dyn Action>>,
     pub data: Vec<Data>,
+    pub run: Run,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -65,17 +65,18 @@ impl Program {
 
     pub fn run_setup(&self) {
         for action in self.metadata.setup.iter() {
-            action.run();
+            action.run().expect("Unable to run action");
         }
     }
 
     fn parse_data(&mut self) {
         for var in self.metadata.data.iter() {
-            self.vars.insert(var.name, var.value)
+            self.vars.insert(var.name.clone(), var.value.clone());
         }
     }
 
     pub fn parse(&mut self) {
+        self.parse_data();
         let value = serde_yaml::to_string(&self.metadata).unwrap();
         let parsed = value.format(&self.vars).unwrap();
         let parsed_object: MetaData = serde_yaml::from_str(&parsed).unwrap();

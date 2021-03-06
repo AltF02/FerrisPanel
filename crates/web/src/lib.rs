@@ -10,12 +10,10 @@ extern crate actix_web;
 use actix_identity::{CookieIdentityPolicy, IdentityService};
 use actix_web::http::ContentEncoding;
 use actix_web::middleware::Logger;
-use actix_web::test::config;
 use actix_web::{web, App, HttpRequest, HttpServer, Responder};
 use core::config::Config;
 use log::LevelFilter;
 use rand::Rng;
-use sqlx::PgPool;
 use std::error::Error;
 
 pub mod prelude {

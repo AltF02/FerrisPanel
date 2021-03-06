@@ -1,5 +1,4 @@
 use clap::ArgMatches;
-use core::config::Config;
 use std::error::Error;
 
 #[cfg(not(debug_assertions))]

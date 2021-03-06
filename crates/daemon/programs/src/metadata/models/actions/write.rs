@@ -7,15 +7,16 @@ use std::process::Command;
 
 #[derive(Serialize, Deserialize)]
 pub struct Write {
-    pub target: &'static str,
+    pub target: String,
     pub content: String,
 }
 
 impl Write {}
 
+#[typetag::serde(name = "write")]
 impl Action for Write {
     fn run(&self) -> Result<(), Box<dyn Error>> {
-        let file = fs::File::open(self.target);
+        let mut file = fs::File::create(self.target.as_str())?;
         file.write_all(self.content.as_bytes())?;
         Ok(())
     }

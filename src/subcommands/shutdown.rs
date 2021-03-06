@@ -4,7 +4,6 @@ use std::error::Error;
 use std::fs::File;
 use std::io::Read;
 use std::process::Command;
-use sysinfo::{ProcessExt, SystemExt};
 
 pub async fn run(_matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
     let config = Config::new();

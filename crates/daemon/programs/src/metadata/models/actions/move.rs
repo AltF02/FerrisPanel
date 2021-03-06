@@ -1,21 +1,20 @@
 use crate::metadata::models::actions::Action;
 use serde::{Deserialize, Serialize};
 use std::error::Error;
-use std::process::Command;
+use std::fs;
 
 #[derive(Serialize, Deserialize)]
 pub struct Move {
-    pub source: &'static str,
-    pub target: &'static str,
+    pub source: String,
+    pub target: String,
 }
 
 impl Move {}
 
+#[typetag::serde(name = "move")]
 impl Action for Move {
     fn run(&self) -> Result<(), Box<dyn Error>> {
-        Command::new("/usr/bin/mv")
-            .args(&[self.source, self.target])
-            .output()?;
+        fs::rename(&self.source, &self.target)?;
         Ok(())
     }
 }

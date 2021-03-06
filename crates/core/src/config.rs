@@ -2,7 +2,6 @@ use serde::{Deserialize, Serialize};
 use std::env;
 use std::fs::File;
 use std::io::Read;
-use std::panic::panic_any;
 
 const DEFAULT_LOCATION: &str = "./config.yml";
 

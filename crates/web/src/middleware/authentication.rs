@@ -3,7 +3,7 @@ use std::task::{Context, Poll};
 
 use actix_identity::RequestIdentity;
 use actix_service::{Service, Transform};
-use actix_web::{dev::ServiceRequest, dev::ServiceResponse, Error, HttpMessage, HttpResponse};
+use actix_web::{dev::ServiceRequest, dev::ServiceResponse, Error, HttpResponse};
 use core::error::HttpError;
 use futures::future::{ok, Ready};
 use futures::Future;
