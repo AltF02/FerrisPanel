@@ -20,8 +20,9 @@ sysinfo = "0.16.4"
 
 core = { path = "crates/core" }
 models = { path = "crates/models" }
-server = { path = "crates/server" }
+web = { path = "crates/web" }
 controller = { path = "crates/controller" }
+daemon = { path = "crates/daemon" }
 
 [dependencies.actix-web]
 version = "3.3"

@@ -1,0 +1,24 @@
+---
+type: "minecraft-java"
+name: "Minecraft - Paper"
+setup:
+  - type: "download"
+    file: "https://papermc.io/api/v2/projects/paper/versions/${version}/builds/${build}/downloads/paper-${version}-${build}.jar"
+
+  - type: "move"
+    source: "paper-*.jar"
+    target: "paper.jar"
+
+  - type: "write"
+    content: "server-ip=${ip}\n
+    server-port=${port}\n
+    motd=${motd}\n"
+    target: "server.properties"
+
+run:
+  program: "java"
+  args:
+    - "-Xmx${memory}M"
+    - "-Djline.terminal=jline.UnsupportedTerminal"
+    - "-jar"
+    - "paper.jar"

@@ -889,6 +889,9 @@ dependencies = [
 [[package]]
 name = "daemon"
 version = "0.1.0"
+dependencies = [
+ "programs",
+]
 
 [[package]]
 name = "derive_more"
@@ -988,12 +991,13 @@ dependencies = [
  "clap",
  "controller",
  "core",
+ "daemon",
  "dialoguer",
  "dotenv",
  "models",
  "regex",
- "server",
  "sysinfo",
+ "web",
 ]
 
 [[package]]
@@ -1850,6 +1854,10 @@ dependencies = [
 [[package]]
 name = "programs"
 version = "0.1.0"
+dependencies = [
+ "serde",
+ "serde_yaml",
+]
 
 [[package]]
 name = "quick-error"
@@ -2194,25 +2202,6 @@ dependencies = [
  "linked-hash-map",
  "serde",
  "yaml-rust",
-]
-
-[[package]]
-name = "server"
-version = "0.1.0"
-dependencies = [
- "actix-files",
- "actix-identity",
- "actix-service",
- "actix-web",
- "controller",
- "core",
- "futures",
- "log",
- "models",
- "rand 0.8.3",
- "serde",
- "simple-logging",
- "sqlx",
 ]
 
 [[package]]
@@ -3009,6 +2998,25 @@ name = "wasm-bindgen-shared"
 version = "0.2.70"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "dd4945e4943ae02d15c13962b38a5b1e81eadd4b71214eee75af64a4d6a4fd64"
+
+[[package]]
+name = "web"
+version = "0.1.0"
+dependencies = [
+ "actix-files",
+ "actix-identity",
+ "actix-service",
+ "actix-web",
+ "controller",
+ "core",
+ "futures",
+ "log",
+ "models",
+ "rand 0.8.3",
+ "serde",
+ "simple-logging",
+ "sqlx",
+]
 
 [[package]]
 name = "web-sys"
