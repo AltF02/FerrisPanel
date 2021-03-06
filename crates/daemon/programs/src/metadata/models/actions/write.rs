@@ -3,7 +3,6 @@ use serde::{Deserialize, Serialize};
 use std::error::Error;
 use std::fs;
 use std::io::Write as IOWrite;
-use std::process::Command;
 
 #[derive(Serialize, Deserialize)]
 pub struct Write {

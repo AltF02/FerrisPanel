@@ -32,6 +32,12 @@ pub struct ServerConfig {
     pub cookie_name: String,
 }
 
+impl Default for Config {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl Config {
     pub fn new() -> Config {
         match Config::retrieve() {

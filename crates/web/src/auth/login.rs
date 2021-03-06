@@ -21,7 +21,7 @@ pub async fn post(
         .unwrap();
 
     return if let Some(user) = user {
-        id.remember(user.email.to_owned());
+        id.remember(user.email);
         Ok(HttpResponse::Ok().finish())
     } else {
         Ok(HttpResponse::Unauthorized().json(HttpError {

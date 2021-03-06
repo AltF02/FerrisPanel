@@ -21,11 +21,8 @@ pub trait UserModify {
     ) -> Result<(), Box<dyn Error>>;
     async fn set_password(&mut self, pw: String, pool: &PgPool) -> Result<(), Box<dyn Error>>;
     async fn fetch(fetch: String, pool: &PgPool) -> Result<Option<User>, Box<dyn Error>>;
-    async fn login(
-        id: &String,
-        password: &String,
-        pool: &PgPool,
-    ) -> Result<Option<User>, Box<dyn Error>>;
+    async fn login(id: &str, password: &str, pool: &PgPool)
+        -> Result<Option<User>, Box<dyn Error>>;
 }
 
 #[async_trait]
@@ -71,8 +68,8 @@ impl UserModify for User {
     }
 
     async fn login(
-        id: &String,
-        password: &String,
+        id: &str,
+        password: &str,
         pool: &PgPool,
     ) -> Result<Option<User>, Box<dyn Error>> {
         let user: Option<User> =
@@ -94,9 +91,3 @@ impl UserModify for User {
         Ok(None)
     }
 }
-
-// impl Model for User {
-//     fn new() {
-//         return;
-//     }
-// }
