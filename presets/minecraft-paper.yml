@@ -3,22 +3,30 @@ type: "minecraft-java"
 name: "Minecraft - Paper"
 setup:
   - type: "download"
-    file: "https://papermc.io/api/v2/projects/paper/versions/${version}/builds/${build}/downloads/paper-${version}-${build}.jar"
+    file: "https://papermc.io/api/v2/projects/paper/versions/{version}/builds/{build}/downloads/paper-{version}-{build}.jar"
 
   - type: "move"
     source: "paper-*.jar"
     target: "paper.jar"
 
-  - type: "write"
-    content: "server-ip=${ip}\n
-    server-port=${port}\n
-    motd=${motd}\n"
-    target: "server.properties"
+#  - type: "write"
+#    content: "server-ip=${ip}\nserver-port={port}\nmotd={motd}\n"
+#    target: "server.properties"
 
 run:
   program: "java"
   args:
-    - "-Xmx${memory}M"
+    - "-Xmx{memory}M"
     - "-Djline.terminal=jline.UnsupportedTerminal"
     - "-jar"
     - "paper.jar"
+
+data:
+  - name: "memory"
+    value: "1024"
+
+  - name: "version"
+    value: "1.16.5"
+
+  - name: "build"
+    value: "526"

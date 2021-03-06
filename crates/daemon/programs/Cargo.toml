@@ -9,3 +9,6 @@ edition = "2018"
 [dependencies]
 serde = "1.0.124"
 serde_yaml = "0.8.17"
+erased-serde = "0.3"
+
+strfmt = "0.1.6"

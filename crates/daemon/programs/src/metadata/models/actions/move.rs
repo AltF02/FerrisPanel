@@ -1,7 +1,9 @@
 use crate::metadata::models::actions::Action;
+use serde::{Deserialize, Serialize};
 use std::error::Error;
 use std::process::Command;
 
+#[derive(Serialize, Deserialize)]
 pub struct Move {
     pub source: &'static str,
     pub target: &'static str,
