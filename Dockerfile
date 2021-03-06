@@ -13,9 +13,9 @@ COPY . .
 RUN cargo build --release && mv ./target/release/ferrispanel /ferrispanel/ferrispanel
 RUN cd client && \
     npm install && \
-    npm run build && \
-    ls && \
-    mv ./dist /pufferpanel/www/
+    npm run build
+
+#COPY /build/ferrispanel/www /pufferpanel/www
 
 FROM alpine
 COPY --from=builder /ferrispanel /ferrispanel

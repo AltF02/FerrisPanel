@@ -3,6 +3,7 @@ name = "ferrispanel"
 version = "0.1.0"
 authors = ["DankDumpster <dev@mtbk.me>"]
 edition = "2018"
+license = "Apache-2.0"
 
 [workspace]
 members = [

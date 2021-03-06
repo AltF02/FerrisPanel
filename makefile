@@ -1,9 +1,14 @@
 install:
 	@bash ./scripts/preinstall.sh
 
-	@cargo build --release -Z unstable-options --out-dir /usr/bin
-	@yarn --cwd client
-	@yarn --cwd client build
+	@echo -n "Compiling server (This can take some time...): "
+	@cargo build --release -Z unstable-options --out-dir /usr/bin &> /dev/null
+	@echo "Done."
+
+	@echo -n "Building frontend: "
+	@yarn --cwd client &> /dev/null
+	@yarn --cwd client build &> /dev/null
+	@echo "Done."
 
 	@cp -r ./www /etc/ferrispanel/www
 

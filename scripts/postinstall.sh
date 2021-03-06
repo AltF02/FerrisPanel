@@ -4,3 +4,7 @@ chown ferrispanel:ferrispanel -R /etc/ferrispanel
 mkdir /run/ferrispanel
 chown ferrispanel:ferrispanel -R /run/ferrispanel
 echo "Done."
+
+echo -n "Running migrations: "
+sqlx migrate run
+echo "Done."
