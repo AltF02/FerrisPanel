@@ -1,4 +1,4 @@
-use crate::metadata::models::actions::Action;
+use crate::models::metadata::actions::Action;
 use serde::{Deserialize, Serialize};
 use std::error::Error;
 use std::fs;

@@ -1,4 +1,4 @@
-use programs::metadata::models::Program;
+use programs::models::program::Program;
 
 pub fn test() {
     let mut preset = Program::new("./presets/minecraft-paper.yml".to_string());
