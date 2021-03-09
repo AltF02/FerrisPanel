@@ -7,14 +7,14 @@ mod subcommands;
 
 #[actix_web::main]
 async fn main() -> Result<(), Box<dyn Error>> {
-    // let yaml = load_yaml!("../cli.yaml");
-    // let matches = ClapApp::from(yaml).get_matches();
-    //
-    // dotenv().ok();
-    //
-    // subcommands::handle(&matches).await?;
+    let yaml = load_yaml!("../cli.yaml");
+    let matches = ClapApp::from(yaml).get_matches();
 
-    daemon::test();
+    dotenv().ok();
+
+    subcommands::handle(&matches).await?;
+
+    // daemon::test();
 
     Ok(())
 }

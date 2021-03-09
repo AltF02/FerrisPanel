@@ -84,7 +84,7 @@ impl UserModify for User {
 
         let user_hash = user.clone().unwrap().password_hash;
         let verify = bcrypt::verify(password, user_hash.as_str());
-        if verify.unwrap() {
+        if verify.is_ok() {
             return Ok(user);
         }
 
