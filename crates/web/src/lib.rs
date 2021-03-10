@@ -53,7 +53,7 @@ pub async fn start() -> Result<(), Box<dyn Error>> {
                     .configure(api::init),
             )
             .service(web::scope("/auth").configure(auth::init))
-            .service(actix_files::Files::new("/", "./www").index_file("index.html"))
+            .service(actix_files::Files::new("/", "./client/build").index_file("index.html"))
     })
     .bind("0.0.0.0:3000")?
     .run()
