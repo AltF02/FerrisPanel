@@ -1,8 +1,9 @@
 use bcrypt::DEFAULT_COST;
 use sqlx::PgPool;
 use std::error::Error;
+use serde::{Serialize, Deserialize};
 
-#[derive(sqlx::FromRow, Clone, Debug)]
+#[derive(sqlx::FromRow, Clone, Debug, Serialize, Deserialize)]
 pub struct User {
     pub id: i32,
     pub name: String,
@@ -84,8 +85,14 @@ impl UserModify for User {
 
         let user_hash = user.clone().unwrap().password_hash;
         let verify = bcrypt::verify(password, user_hash.as_str());
-        if verify.is_ok() {
-            return Ok(user);
+
+        if let Ok(verify_res) = verify {
+            return if verify_res {
+                Ok(user)
+            } else {
+                Ok(None)
+            }
+
         }
 
         Ok(None)

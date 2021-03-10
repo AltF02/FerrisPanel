@@ -6,9 +6,9 @@ use sqlx::PgPool;
 
 #[derive(Deserialize, Serialize)]
 pub struct UserResponse {
-    username: String,
-    email: String,
-    id: i32,
+    pub(crate) username: String,
+    pub(crate) email: String,
+    pub(crate) id: i32,
 }
 
 pub async fn get(id: Identity, pool: web::Data<PgPool>) -> Result<HttpResponse, Error> {

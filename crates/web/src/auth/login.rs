@@ -4,6 +4,7 @@ use core::error::HttpError;
 use models::prelude::{User, UserModify};
 use serde::Deserialize;
 use sqlx::PgPool;
+use crate::api::users::me::UserResponse;
 
 #[derive(Deserialize)]
 pub struct Login {
@@ -21,8 +22,12 @@ pub async fn post(
         .unwrap();
 
     return if let Some(user) = user {
-        id.remember(user.email);
-        Ok(HttpResponse::Ok().finish())
+        id.remember(user.email.clone());
+        Ok(HttpResponse::Ok().json(UserResponse {
+            username: user.name,
+            email: user.email,
+            id: user.id
+        }))
     } else {
         Ok(HttpResponse::Unauthorized().json(HttpError {
             info: "Unauthorized",

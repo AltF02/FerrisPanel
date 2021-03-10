@@ -24,6 +24,8 @@
         "import/extensions": "off",
         "import/no-unresolved": "off",
         "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
-        "react/jsx-props-no-spreading": "off"
+        "react/jsx-props-no-spreading": "off",
+        "react/no-array-index-key": "off",
+        "import/no-extraneous-dependencies": "off"
     }
 }

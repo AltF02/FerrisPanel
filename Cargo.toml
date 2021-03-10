@@ -12,6 +12,9 @@ members = [
 ]
 exclude = ["crates/daemon/src"]
 
+[profile.dev]
+opt-level = 3
+
 [dependencies]
 dialoguer = "0.7"
 regex = "1.4"
