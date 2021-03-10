@@ -5,9 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: CD into client
-        run: cd client
       - name: Install modules
-        run: yarn
+        run: yarn --cwd client
       - name: Run ESLint
-        run: yarn run eslint . --ext .js,.jsx,.ts,.tsx
+        run: yarn run --cwd client eslint . --ext .js,.jsx,.ts,.tsx
