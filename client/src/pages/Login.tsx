@@ -1,16 +1,15 @@
-import React from 'react'
-import LoginForm from "../components/LoginForm";
+import React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
+import LoginForm from '../components/LoginForm';
 
-export default class Login extends React.Component {
-    login() {
-        console.log("Login!");
-    }
+interface IProps extends RouteComponentProps {
 
-    render() {
-        return (
-            <div>
-                <LoginForm/>
-            </div>
-        )
-    }
+}
+
+export default function Login(props: IProps) {
+  return (
+    <div className="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
+      <LoginForm {...props} />
+    </div>
+  );
 }

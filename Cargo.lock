@@ -3085,6 +3085,10 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "dd4945e4943ae02d15c13962b38a5b1e81eadd4b71214eee75af64a4d6a4fd64"
 
 [[package]]
+name = "watchdog"
+version = "0.1.0"
+
+[[package]]
 name = "web"
 version = "0.1.0"
 dependencies = [
