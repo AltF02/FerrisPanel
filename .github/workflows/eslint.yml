@@ -8,4 +8,4 @@ jobs:
       - name: Install modules
         run: yarn --cwd client
       - name: Run ESLint
-        run: yarn run --cwd client eslint . --ext .ts,.tsx
+        run: yarn --cwd client run eslint . --ext .ts,.tsx
