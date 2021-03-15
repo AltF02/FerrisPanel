@@ -6,10 +6,12 @@ import App from './App';
 import Fallback from './components/Fallback';
 
 ReactDOM.render(
-  <Windmill usePreferences dark>
-    <Suspense fallback={<Fallback />}>
-      <App />
-    </Suspense>
-  </Windmill>,
+  <React.StrictMode>
+    <Windmill usePreferences dark>
+      <Suspense fallback={<Fallback />}>
+        <App />
+      </Suspense>
+    </Windmill>
+  </React.StrictMode>,
   document.getElementById('root'),
 );
