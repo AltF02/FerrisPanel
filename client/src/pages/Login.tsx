@@ -12,7 +12,10 @@ interface IProps extends RouteComponentProps {
 export default function Login(props: IProps) {
   const email = useFormInput('');
   const password = useFormInput('');
+
   const [error, setError] = useState(false);
+  const [remember, setRemember] = useState(false);
+
   const { authenticate, loading, authenticated } = UserState.useContainer();
 
   useEffect(() => {
@@ -22,7 +25,7 @@ export default function Login(props: IProps) {
   });
 
   const handleLogin = () => {
-    authenticate(email.value, password.value).then((err) => {
+    authenticate(email.value, password.value, remember).then((err) => {
       setError(err);
       if (!err) {
         props.history.push('app');
@@ -39,26 +42,51 @@ export default function Login(props: IProps) {
               <h1 className="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">Login to FerrisPanel</h1>
               <Label className="mt-4">
                 <span>Email</span>
-                <Input valid={error ? false : undefined} className="mt-1" type="email" placeholder="foo@bar.com" css="" {...email} />
+                <Input
+                  valid={error ? false : undefined}
+                  className="mt-1"
+                  type="email"
+                  placeholder="foo@bar.com"
+                  css=""
+                  {...email}
+                />
               </Label>
 
               <Label className="mt-4">
                 <span>Password</span>
-                <Input valid={error ? false : undefined} className="mt-1" type="password" placeholder="•••••••••••••••" css="" {...password} />
+                <Input
+                  valid={error ? false : undefined}
+                  className="mt-1"
+                  type="password"
+                  placeholder="•••••••••"
+                  css=""
+                  {...password}
+                />
               </Label>
 
-              <Button className="mt-4 w-full" disabled={loading} onClick={handleLogin}>
-                {loading ? 'Loading...' : 'Login'}
-              </Button>
+              <div className="flex justify-between items-center mt-4">
+                <Label className="inline-flex items-center">
+                  <Input
+                    type="checkbox"
+                    css=""
+                    className="text-purple-600 dark:text-purple-400"
+                    onChange={() => setRemember(!remember)}
+                    checked={remember}
+                  />
+                  <span className="mx-2 text-sm font-medium">Remember Me</span>
+                </Label>
 
-              <p className="mt-4">
                 <Link
                   className="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
                   to="/"
                 >
                   Forgot your password?
                 </Link>
-              </p>
+              </div>
+
+              <Button className="mt-4 w-full" disabled={loading} onClick={handleLogin}>
+                {loading ? 'Loading...' : 'Login'}
+              </Button>
             </div>
           </form>
         </div>

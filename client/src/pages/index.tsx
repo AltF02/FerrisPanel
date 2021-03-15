@@ -6,6 +6,7 @@ import { UserState } from '../state';
 
 const Login = lazy(() => import('./Login'));
 const Layout = lazy(() => import('../containers/Layout'));
+const Page404 = lazy(() => import('../pages/404'));
 
 export default function Pages() {
   const { authenticated } = UserState.useContainer();
@@ -25,6 +26,7 @@ export default function Pages() {
       <Redirect exact from="/" to="/login" />
 
       <Route path="/app" component={Layout} />
+      <Route component={Page404} />
     </Switch>
   );
 }

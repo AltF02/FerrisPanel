@@ -3,14 +3,18 @@ import { Route } from 'react-router-dom';
 import routes from '../routes';
 import Main from './Main';
 import Header from '../components/Header';
+import Sidebar from '../components/Sidebar/Sidebar';
 
 // const Page404 = lazy(() => import('../pages/404'));
 
 export default function Layout() {
   return (
     <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
+      <Sidebar />
+
       <div className="flex flex-col flex-1 w-full">
         <Header />
+
         <Main>
           <Suspense fallback={<div>Loading...</div>}>
             {
@@ -27,7 +31,6 @@ export default function Layout() {
                 />
               ) : null))
             }
-            {/* <Route exact path="*" component={Page404} /> */}
           </Suspense>
         </Main>
       </div>

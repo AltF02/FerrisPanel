@@ -10,12 +10,14 @@ import {
   OutlineLogoutIcon,
   UserIcon,
 } from '../icons';
+import userState from '../state/userState';
 
 function Header() {
   const { mode, toggleMode } = useContext(WindmillContext);
 
   const [isNotificationsMenuOpen, setIsNotificationsMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const { logout } = userState.useContainer();
 
   function handleNotificationsClick() {
     setIsNotificationsMenuOpen(!isNotificationsMenuOpen);
@@ -23,6 +25,11 @@ function Header() {
 
   function handleProfileClick() {
     setIsProfileMenuOpen(!isProfileMenuOpen);
+  }
+
+  function handleLogout() {
+    logout();
+    window.location.reload();
   }
 
   return (
@@ -94,7 +101,7 @@ function Header() {
                 <OutlineCogIcon className="w-4 h-4 mr-3" aria-hidden="true" />
                 <span>Settings</span>
               </DropdownItem>
-              <DropdownItem>
+              <DropdownItem onClick={handleLogout}>
                 <OutlineLogoutIcon className="w-4 h-4 mr-3" aria-hidden="true" />
                 <span>Log out</span>
               </DropdownItem>
