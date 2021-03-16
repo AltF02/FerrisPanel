@@ -1,6 +1,6 @@
 use actix_identity::Identity;
 use actix_web::{web, Error, HttpResponse};
-use models::prelude::{User, UserModify};
+use models::prelude::{User, UserExt};
 use serde::{Deserialize, Serialize};
 use sqlx::PgPool;
 

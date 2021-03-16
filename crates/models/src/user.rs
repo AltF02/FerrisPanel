@@ -13,7 +13,7 @@ pub struct User {
 }
 
 #[async_trait]
-pub trait UserModify {
+pub trait UserExt {
     async fn create(
         email: String,
         name: String,
@@ -27,7 +27,7 @@ pub trait UserModify {
 }
 
 #[async_trait]
-impl UserModify for User {
+impl UserExt for User {
     async fn create(
         name: String,
         email: String,

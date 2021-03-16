@@ -2,7 +2,7 @@ use core::config::Config;
 use core::utils::EMAIL_REGEX;
 use dialoguer::theme::ColorfulTheme;
 use dialoguer::{Input, Password};
-use models::prelude::{User, UserModify};
+use models::prelude::{User, UserExt};
 use regex::Regex;
 use std::error::Error;
 

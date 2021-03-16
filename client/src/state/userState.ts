@@ -49,13 +49,13 @@ function userState(): State {
           setUserData(response.data);
         }
 
-        setAuthenticated(success);
+        setAuthenticated(true);
         setLoading(false);
-        return !success;
+        return false;
       }).catch(() => {
-        setAuthenticated(false);
+        setAuthenticated(true);
         setLoading(false);
-        return true;
+        return false;
       });
   }
 

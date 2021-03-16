@@ -10,7 +10,6 @@ export default function Server() {
 
   return (
     <div>
-      Server!
       {serverId}
     </div>
   );

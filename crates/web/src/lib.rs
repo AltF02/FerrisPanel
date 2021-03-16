@@ -49,7 +49,7 @@ pub async fn start() -> Result<(), Box<dyn Error>> {
             .service(pee)
             .service(
                 web::scope("/api")
-                    .wrap(middleware::authentication::Auth)
+                    // .wrap(middleware::authentication::Auth)
                     .configure(api::init),
             )
             .service(web::scope("/auth").configure(auth::init))

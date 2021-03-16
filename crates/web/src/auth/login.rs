@@ -1,7 +1,7 @@
 use actix_identity::Identity;
 use actix_web::{web, Error, HttpResponse};
 use core::error::HttpError;
-use models::prelude::{User, UserModify};
+use models::prelude::{User, UserExt};
 use serde::Deserialize;
 use sqlx::PgPool;
 use crate::api::users::me::UserResponse;

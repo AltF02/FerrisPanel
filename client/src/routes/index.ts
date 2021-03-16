@@ -1,6 +1,6 @@
 import { lazy } from 'react';
 
-const Home = lazy(() => import('../pages/Home'));
+const Dashboard = lazy(() => import('../pages/Dashboard'));
 const Servers = lazy(() => import('../pages/Servers/Servers'));
 const Server = lazy(() => import('../pages/Servers/Server'));
 const Settings = lazy(() => import('../pages/Settings'));
@@ -8,7 +8,7 @@ const Settings = lazy(() => import('../pages/Settings'));
 const routes = [
   {
     path: '/',
-    component: Home,
+    component: Dashboard,
     id: 1,
   },
   {
@@ -17,7 +17,7 @@ const routes = [
     id: 2,
   },
   {
-    path: '/servers/:serverId',
+    path: '/server/:serverId',
     component: Server,
     id: 3,
   },
