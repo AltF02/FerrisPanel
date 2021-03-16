@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Main({ children }: { children: any }) {
+function Main({ children }: { children: React.ReactNode }) {
   return (
     <main className="h-full overflow-y-auto">
       <div className="container grid px-6 mx-auto">{children}</div>

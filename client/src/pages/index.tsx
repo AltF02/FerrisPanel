@@ -1,24 +1,13 @@
 import {
-  Redirect, Route, Switch, useHistory, useLocation,
+  Redirect, Route, Switch,
 } from 'react-router-dom';
-import React, { lazy, useEffect } from 'react';
-import { UserState } from '../state';
+import React, { lazy } from 'react';
 
 const Login = lazy(() => import('./Login'));
 const Layout = lazy(() => import('../containers/Layout'));
 const Page404 = lazy(() => import('../pages/404'));
 
 export default function Pages() {
-  const { authenticated } = UserState.useContainer();
-  const location = useLocation();
-  const history = useHistory();
-
-  useEffect(() => {
-    if (!authenticated && !location.pathname.startsWith('/login')) {
-      history.push('/login');
-    }
-  }, [location.pathname]);
-
   return (
     <Switch>
       <Route path="/login" component={Login} />

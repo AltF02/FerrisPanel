@@ -25,7 +25,7 @@ export default function Login(props: IProps) {
   });
 
   const handleLogin = () => {
-    authenticate(email.value, password.value, remember).then((err) => {
+    authenticate(true, { id: email.value, password: password.value, remember }).then((err) => {
       setError(err);
       if (!err) {
         props.history.push('app');

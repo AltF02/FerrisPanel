@@ -1,8 +1,10 @@
 import React from 'react';
-import { Button } from '@windmill/react-ui';
+import PageTitle from '../components/Typography/PageTitle';
 
 export default function Home() {
   return (
-    <Button>Hi there!</Button>
+    <div>
+      <PageTitle>Dashboard</PageTitle>
+    </div>
   );
 }

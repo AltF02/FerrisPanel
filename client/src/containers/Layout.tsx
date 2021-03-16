@@ -1,11 +1,11 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Route } from 'react-router-dom';
 import routes from '../routes';
 import Main from './Main';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar/Sidebar';
 
-// const Page404 = lazy(() => import('../pages/404'));
+const Fallback = lazy(() => import('../components/Fallback'));
 
 export default function Layout() {
   return (
@@ -16,7 +16,7 @@ export default function Layout() {
         <Header />
 
         <Main>
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Fallback />}>
             {
               routes.map((route) => (route.component ? (
                 // @ts-ignore

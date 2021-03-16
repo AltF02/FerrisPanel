@@ -2,9 +2,11 @@
 
 export type State = {
   authenticated?: boolean,
-  authenticate: (id: string, password: string, remember: boolean) => Promise<boolean>
-  logout: () => void
+  authenticate: (update: boolean, data: Api.AuthData | undefined) => Promise<boolean>
+  logout: () => void,
+  fetch: () => Promise<boolean>
   loading: boolean,
+  userData: Api.User | undefined
 }
 
 declare namespace Api {
@@ -12,5 +14,11 @@ declare namespace Api {
     username: string,
     email: string,
     id: string
+  }
+
+  export type AuthData = {
+    id: string,
+    password: string,
+    remember: boolean
   }
 }
