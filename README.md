@@ -1,6 +1,6 @@
 # FerrisPanel
 
-_**FerrisPanel is currently in pre-alpha and isn't currently in a working state**_
+_**FerrisPanel is currently in pre-alpha and isn't in a working state**_
 
 FerrisPanel is an open source game server panel. Made in rust
 
