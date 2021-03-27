@@ -29,10 +29,7 @@ pub async fn start() -> Result<(), Box<dyn Error>> {
     let config = Config::new();
     let pg_pool = controller::connect(&config).await.unwrap();
 
-    #[cfg(not(debug_assertions))]
-    simple_logging::log_to_file(core::logging::create(&config)?, LevelFilter::Info)?;
-    #[cfg(debug_assertions)]
-    simple_logging::log_to_stderr(LevelFilter::Debug);
+    core::logging::setup(&config);
 
     let private_key = rand::thread_rng().gen::<[u8; 32]>();
 
@@ -49,7 +46,7 @@ pub async fn start() -> Result<(), Box<dyn Error>> {
             .service(pee)
             .service(
                 web::scope("/api")
-                    // .wrap(middleware::authentication::Auth)
+                    .wrap(middleware::authentication::Auth)
                     .configure(api::init),
             )
             .service(web::scope("/auth").configure(auth::init))

@@ -1,18 +1,25 @@
 use crate::config::Config;
-use chrono::Local;
+use log::LevelFilter;
 use std::error::Error;
-use std::fs;
-use std::path::Path;
 
-pub fn create(config: &Config) -> Result<String, Box<dyn Error>> {
-    let folder = format!("{}/logs", config.folders.work);
+pub fn setup(config: &Config) -> Result<(), Box<dyn Error>> {
+    #[cfg(not(debug_assertions))]
+    let level = LevelFilter::Info;
+    #[cfg(debug_assertions)]
+    let level = LevelFilter::Debug;
 
-    if !Path::new(&folder).exists() {
-        let builder = fs::DirBuilder::new();
-        builder.create(&folder)?;
-    }
+    let logger = fern::Dispatch::new()
+        .level(level)
+        .level_for("sqlx", LevelFilter::Warn)
+        .chain(std::io::stdout());
 
-    let filename = Local::now().format("%F-%H:%I").to_string();
+    #[cfg(not(debug_assertions))]
+    logger.chain(fern::DateBased::new(
+        format!("{}/logs", config.folders.work),
+        "%F-%H:%I.log",
+    ));
 
-    Ok(format!("{}/{}.log", &folder, filename))
+    logger.apply()?;
+
+    Ok(())
 }
