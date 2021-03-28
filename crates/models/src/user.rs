@@ -1,7 +1,7 @@
 use bcrypt::DEFAULT_COST;
+use serde::{Deserialize, Serialize};
 use sqlx::PgPool;
 use std::error::Error;
-use serde::{Serialize, Deserialize};
 
 #[derive(sqlx::FromRow, Clone, Debug, Serialize, Deserialize)]
 pub struct User {
@@ -87,12 +87,7 @@ impl UserExt for User {
         let verify = bcrypt::verify(password, user_hash.as_str());
 
         if let Ok(verify_res) = verify {
-            return if verify_res {
-                Ok(user)
-            } else {
-                Ok(None)
-            }
-
+            return if verify_res { Ok(user) } else { Ok(None) };
         }
 
         Ok(None)

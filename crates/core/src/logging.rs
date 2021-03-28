@@ -2,7 +2,7 @@ use crate::config::Config;
 use log::LevelFilter;
 use std::error::Error;
 
-pub fn setup(config: &Config) -> Result<(), Box<dyn Error>> {
+pub fn setup(_config: &Config) -> Result<(), Box<dyn Error>> {
     #[cfg(not(debug_assertions))]
     let level = LevelFilter::Info;
     #[cfg(debug_assertions)]
@@ -15,7 +15,7 @@ pub fn setup(config: &Config) -> Result<(), Box<dyn Error>> {
 
     #[cfg(not(debug_assertions))]
     logger.chain(fern::DateBased::new(
-        format!("{}/logs", config.folders.work),
+        format!("{}/logs", _config.folders.work),
         "%F-%H:%I.log",
     ));
 

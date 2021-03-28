@@ -1,19 +1,18 @@
 use crate::models::MetaData;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
-use std::process::Child;
 use strfmt::Format;
 
 #[derive(Serialize, Deserialize)]
-pub struct Program {
+pub struct Server {
     pub metadata: MetaData,
     pub vars: HashMap<String, String>,
     pub pid: Option<u32>,
 }
 
-impl Program {
+impl Server {
     pub fn new(preset: String) -> Self {
-        Program {
+        Server {
             metadata: MetaData::new(preset),
             vars: HashMap::new(),
             pid: None,

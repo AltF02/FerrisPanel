@@ -8,7 +8,7 @@ use metadata::data::Data;
 use metadata::run::Run;
 
 pub mod metadata;
-pub mod program;
+pub mod server;
 
 #[derive(Serialize, Deserialize)]
 pub struct MetaData {

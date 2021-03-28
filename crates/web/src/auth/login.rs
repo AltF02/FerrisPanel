@@ -1,10 +1,10 @@
+use crate::api::users::me::UserResponse;
 use actix_identity::Identity;
 use actix_web::{web, Error, HttpResponse};
 use core::error::HttpError;
 use models::prelude::{User, UserExt};
 use serde::Deserialize;
 use sqlx::PgPool;
-use crate::api::users::me::UserResponse;
 
 #[derive(Deserialize)]
 pub struct Login {
@@ -26,7 +26,7 @@ pub async fn post(
         Ok(HttpResponse::Ok().json(UserResponse {
             username: user.name,
             email: user.email,
-            id: user.id
+            id: user.id,
         }))
     } else {
         Ok(HttpResponse::Unauthorized().json(HttpError {

@@ -12,7 +12,6 @@ use actix_web::http::ContentEncoding;
 use actix_web::middleware::Logger;
 use actix_web::{web, App, HttpRequest, HttpServer, Responder};
 use core::config::Config;
-use log::LevelFilter;
 use rand::Rng;
 use std::error::Error;
 
@@ -29,7 +28,7 @@ pub async fn start() -> Result<(), Box<dyn Error>> {
     let config = Config::new();
     let pg_pool = controller::connect(&config).await.unwrap();
 
-    core::logging::setup(&config);
+    core::logging::setup(&config)?;
 
     let private_key = rand::thread_rng().gen::<[u8; 32]>();
 

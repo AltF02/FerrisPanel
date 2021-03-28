@@ -1,7 +1,7 @@
-use programs::models::program::Program;
+use programs::models::server::Server;
 
 pub fn test() {
-    let mut preset = Program::new("./presets/minecraft-paper.yml".to_string());
+    let mut preset = Server::new("./presets/minecraft-paper.yml".to_string());
     preset.parse();
     preset.run_setup();
 
