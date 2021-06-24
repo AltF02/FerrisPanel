@@ -1,0 +1,6 @@
+[book]
+authors = ["DankDumpster"]
+language = "en"
+multilingual = false
+src = "src"
+title = "FerrisPanel"

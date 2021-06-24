@@ -1,0 +1,11 @@
+name: ESLint
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install modules
+        run: yarn --cwd client
+      - name: Run ESLint
+        run: yarn --cwd client run eslint . --ext .ts,.tsx

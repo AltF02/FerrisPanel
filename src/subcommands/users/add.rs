@@ -1,15 +1,14 @@
-use core::controller;
-use core::models::{User, UserModify};
+use core::config::Config;
 use core::utils::EMAIL_REGEX;
 use dialoguer::theme::ColorfulTheme;
 use dialoguer::{Input, Password};
+use models::prelude::{User, UserExt};
 use regex::Regex;
 use std::error::Error;
 
 pub(crate) async fn run() -> Result<(), Box<dyn Error>> {
-    let pool = controller::connect(std::env::var("DATABASE_URL").unwrap().as_str())
-        .await
-        .unwrap();
+    let config = Config::new();
+    let pool = controller::connect(&config).await.unwrap();
 
     let username = Input::<String>::with_theme(&ColorfulTheme::default())
         .with_prompt("Username: ")

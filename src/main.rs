@@ -3,7 +3,6 @@ use std::error::Error;
 use clap::{load_yaml, App as ClapApp};
 use dotenv::dotenv;
 
-mod constants;
 mod subcommands;
 
 #[actix_web::main]
@@ -14,6 +13,8 @@ async fn main() -> Result<(), Box<dyn Error>> {
     dotenv().ok();
 
     subcommands::handle(&matches).await?;
+
+    // daemon::test();
 
     Ok(())
 }

@@ -1,8 +1,9 @@
 use bcrypt::DEFAULT_COST;
+use serde::{Deserialize, Serialize};
 use sqlx::PgPool;
 use std::error::Error;
 
-#[derive(sqlx::FromRow, Clone, Debug)]
+#[derive(sqlx::FromRow, Clone, Debug, Serialize, Deserialize)]
 pub struct User {
     pub id: i32,
     pub name: String,
@@ -12,7 +13,7 @@ pub struct User {
 }
 
 #[async_trait]
-pub trait UserModify {
+pub trait UserExt {
     async fn create(
         email: String,
         name: String,
@@ -21,15 +22,12 @@ pub trait UserModify {
     ) -> Result<(), Box<dyn Error>>;
     async fn set_password(&mut self, pw: String, pool: &PgPool) -> Result<(), Box<dyn Error>>;
     async fn fetch(fetch: String, pool: &PgPool) -> Result<Option<User>, Box<dyn Error>>;
-    async fn login(
-        id: &String,
-        password: &String,
-        pool: &PgPool,
-    ) -> Result<Option<User>, Box<dyn Error>>;
+    async fn login(id: &str, password: &str, pool: &PgPool)
+        -> Result<Option<User>, Box<dyn Error>>;
 }
 
 #[async_trait]
-impl UserModify for User {
+impl UserExt for User {
     async fn create(
         name: String,
         email: String,
@@ -71,8 +69,8 @@ impl UserModify for User {
     }
 
     async fn login(
-        id: &String,
-        password: &String,
+        id: &str,
+        password: &str,
         pool: &PgPool,
     ) -> Result<Option<User>, Box<dyn Error>> {
         let user: Option<User> =
@@ -87,16 +85,11 @@ impl UserModify for User {
 
         let user_hash = user.clone().unwrap().password_hash;
         let verify = bcrypt::verify(password, user_hash.as_str());
-        if verify.unwrap() {
-            return Ok(user);
+
+        if let Ok(verify_res) = verify {
+            return if verify_res { Ok(user) } else { Ok(None) };
         }
 
         Ok(None)
     }
 }
-
-// impl Model for User {
-//     fn new() {
-//         return;
-//     }
-// }

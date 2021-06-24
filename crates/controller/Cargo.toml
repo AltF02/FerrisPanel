@@ -9,6 +9,7 @@ edition = "2018"
 [dependencies]
 async-trait = "0.1.42"
 models = { path = "../models" }
+core = { path = "../core" }
 
 [dependencies.sqlx]
 version = "0.4"

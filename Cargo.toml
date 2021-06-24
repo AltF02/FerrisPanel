@@ -3,16 +3,29 @@ name = "ferrispanel"
 version = "0.1.0"
 authors = ["DankDumpster <dev@mtbk.me>"]
 edition = "2018"
+license = "Apache-2.0"
 
 [workspace]
-members = ["crates/*"]
+members = [
+    "crates/*",
+    "crates/daemon/*"
+]
+exclude = ["crates/daemon/src"]
+
+[profile.dev]
+opt-level = 3
 
 [dependencies]
 dialoguer = "0.7"
 regex = "1.4"
 dotenv = "0.15.0"
+sysinfo = "0.16.4"
 
 core = { path = "crates/core" }
+models = { path = "crates/models" }
+web = { path = "crates/web" }
+controller = { path = "crates/controller" }
+daemon = { path = "crates/daemon" }
 
 [dependencies.actix-web]
 version = "3.3"

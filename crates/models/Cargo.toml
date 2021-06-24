@@ -9,7 +9,9 @@ edition = "2018"
 [dependencies]
 bcrypt = "0.9.0"
 async-trait = "0.1.42"
+serde = "1.0.124"
+uuid = { version = "0.8.1", features = ["serde"] }
 
 [dependencies.sqlx]
 version = "0.4"
-features = ["postgres", "runtime-actix-rustls"]
+features = ["postgres", "runtime-actix-rustls", "uuid"]

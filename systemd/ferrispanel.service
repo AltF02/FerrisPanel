@@ -2,10 +2,11 @@
 Description=ferrispanel
 
 [Service]
+Environment=CONFIG_FILE=/etc/ferrispanel/config.yml
 Type=simple
 WorkingDirectory=/etc/ferrispanel
 ExecStart=/usr/bin/ferrispanel start
-ExecStop=/usr/bin/pufferpanel shutdown
+ExecStop=/usr/bin/ferrispanel shutdown
 User=ferrispanel
 Group=ferrispanel
 TimeoutStopSec=5m
